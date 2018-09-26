@@ -81,7 +81,7 @@ void Grafo::dfs(int v)
 
 int main()
 {
-	int V = 35;
+	int V = 1500000;
 
 	Grafo grafo(V);
 
