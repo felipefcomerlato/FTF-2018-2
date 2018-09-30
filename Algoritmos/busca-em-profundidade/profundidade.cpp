@@ -40,12 +40,12 @@ void Grafo::dfs(int v)
 	// marca todos como não visitados
 	for(int i = 0; i < V; i++)
 		visitados[i] = false;
-
+	cout << "Iniciando busca...\n";
 	while(true)
 	{
 		if(!visitados[v])
 		{
-			cout << "Visitando vertice " << v << " ...\n";
+			// cout << "Visitando vertice " << v << " ...\n";
 			visitados[v] = true; // marca como visitado
 			pilha.push(v); // insere "v" na pilha
 		}
@@ -81,7 +81,7 @@ void Grafo::dfs(int v)
 
 int main()
 {
-	int V = 1500000;
+	int V = 7500000;
 
 	Grafo grafo(V);
 
@@ -95,19 +95,6 @@ int main()
       j = j + 2;
     }
   }
-
-	// // adicionando as arestas
-	// grafo.adicionarAresta(0, 1);
-	// grafo.adicionarAresta(0, 2);
-	// grafo.adicionarAresta(1, 3);
-	// grafo.adicionarAresta(1, 4);
-	// grafo.adicionarAresta(2, 5);
-	// grafo.adicionarAresta(2, 6);
-  // grafo.adicionarAresta(3, 7);
-  // grafo.adicionarAresta(3, 8);
-  // grafo.adicionarAresta(4, 9);
-  // grafo.adicionarAresta(4, 10);
-	// grafo.adicionarAresta(5, 11);
 
 	grafo.dfs(0);
 
