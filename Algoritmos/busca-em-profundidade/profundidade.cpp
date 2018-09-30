@@ -35,12 +35,14 @@ void Grafo::adicionarAresta(int v1, int v2)
 void Grafo::dfs(int v)
 {
 	stack<int> pilha;
-	bool visitados[V]; // vetor de visitados
+	// bool visitados[V]; // vetor de visitados
+	bool* visitados = (bool*)malloc(sizeof(bool*) * V); //segfault corrigido
 
 	// marca todos como não visitados
-	for(int i = 0; i < V; i++)
+	for(int i = 0; i < V; i++){
 		visitados[i] = false;
-	cout << "Iniciando busca...\n";
+	}
+	// cout << "Iniciando busca...\n";
 	while(true)
 	{
 		if(!visitados[v])
@@ -81,7 +83,7 @@ void Grafo::dfs(int v)
 
 int main()
 {
-	int V = 7500000;
+	int V = 8500000;
 
 	Grafo grafo(V);
 
@@ -97,6 +99,7 @@ int main()
   }
 
 	grafo.dfs(0);
+	// cout << "Terminou a busca\n";
 
 	return 0;
 }
