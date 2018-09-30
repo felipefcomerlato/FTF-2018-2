@@ -111,7 +111,7 @@ int main()
 	cout << "\n\nTempo para montar o grafo: " << ms_grafo << " milisegundos\n\n";
 
 	auto inicio_busca = std::chrono::high_resolution_clock::now();
-	grafo.dfs(0,14999999);
+	grafo.dfs(0,V-1); //busca o último vertice
 	auto result_busca = std::chrono::high_resolution_clock::now() - inicio_busca;
 	long long ms_busca = std::chrono::duration_cast<std::chrono::milliseconds>(result_busca).count();
 	cout << "\nTempo de dfs: " << ms_busca << " milisegundos\n\n";
