@@ -109,7 +109,7 @@ int main()
 
 	Grafo grafo(V);
 
-	auto inicio_grafo = std::chrono::high_resolution_clock::now();
+	auto inicio_grafo = chrono::high_resolution_clock::now();
 	int j = 1;
 	for(int i = 0; i < V; i++)
 	{
@@ -123,14 +123,14 @@ int main()
     		j = j + 2;
     	}
 	}
-	auto result_grafo = std::chrono::high_resolution_clock::now() - inicio_grafo;
-	long long ms_grafo = std::chrono::duration_cast<std::chrono::milliseconds>(result_grafo).count();
+	auto result_grafo = chrono::high_resolution_clock::now() - inicio_grafo;
+	long long ms_grafo = chrono::duration_cast<chrono::milliseconds>(result_grafo).count();
 	cout << "\n\nTempo para montar o grafo: " << ms_grafo << " milisegundos\n\n";
 
-	auto inicio_busca = std::chrono::high_resolution_clock::now();
+	auto inicio_busca = chrono::high_resolution_clock::now();
 	grafo.dijkstra(0,V-1); //busca o �ltimo vertice
-	auto result_busca = std::chrono::high_resolution_clock::now() - inicio_busca;
-	long long ms_busca = std::chrono::duration_cast<std::chrono::milliseconds>(result_busca).count();
+	auto result_busca = chrono::high_resolution_clock::now() - inicio_busca;
+	long long ms_busca = chrono::duration_cast<chrono::milliseconds>(result_busca).count();
 	cout << "\nTempo de dijkstra: " << ms_busca << " milisegundos\n\n";
 
 	return 0;
