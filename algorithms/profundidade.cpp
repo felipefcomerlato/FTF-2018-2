@@ -94,18 +94,19 @@ int main()
 	Grafo grafo(V);
 
 	auto inicio_grafo = std::chrono::high_resolution_clock::now();
-  int j = 1;
-  for(int i = 0; i < V; i++)
-  {
-    if(j < V)
-    {
+	int j = 1;
+	for(int i = 0; i < V; i++)
+	{
+    	if(j < V)
+    	{
 			grafo.adicionarAresta(i, j);
-			if (j < V-1){
-	    	grafo.adicionarAresta(i, j+1);
+			if (j < V-1)
+			{
+	    		grafo.adicionarAresta(i, j+1);
 			}
-      j = j + 2;
-    }
-  }
+			j = j + 2;
+		}
+	}
 	auto result_grafo = std::chrono::high_resolution_clock::now() - inicio_grafo;
 	long long ms_grafo = std::chrono::duration_cast<std::chrono::milliseconds>(result_grafo).count();
 	cout << "\n\nTempo para montar o grafo: " << ms_grafo << " milisegundos\n\n";
