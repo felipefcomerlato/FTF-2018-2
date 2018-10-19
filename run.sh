@@ -2,6 +2,9 @@ printf "Building\n"
 make clean -C ./algorithms/
 make -C ./algorithms/
 
+printf "Clearing logs\n"
+rm -rf ./logs
+
 printf "Copying executables to tmp\n"
 mkdir -p /tmp/ftf
 cp ./algorithms/djikstra     /tmp/ftf/djikstra
@@ -16,7 +19,7 @@ mkdir -p /tmp/ftf/gold
 
 printf "Gold files done, injecting faults\n"
 # One terminal per executable
-gnome-terminal -e "./fault_injector.py -c ./algorithms/djikstra.conf     -i 10"
-gnome-terminal -e "./fault_injector.py -c ./algorithms/largura.conf      -i 10"
-gnome-terminal -e "./fault_injector.py -c ./algorithms/profundidade.conf -i 10"
+gnome-terminal -e "./fault_injector.py -c ./algorithms/djikstra.conf     -i 100"
+gnome-terminal -e "./fault_injector.py -c ./algorithms/largura.conf      -i 100"
+gnome-terminal -e "./fault_injector.py -c ./algorithms/profundidade.conf -i 100"
 

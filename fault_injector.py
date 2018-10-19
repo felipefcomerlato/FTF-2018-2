@@ -173,7 +173,7 @@ def saveOutput(section, isHang):
 
     dt = datetime.datetime.fromtimestamp(time.time())
     ymd = dt.strftime('%Y_%m_%d')
-    ymdhms = dt.strftime('%Y_%m_%d_%H_%M_%S')
+    ymdhms = dt.strftime('%Y_%m_%d_%H_%M_%S_%f')
     ymdhms = uniqueID+"-"+ymdhms
     dirDT = os.path.join(ymd,ymdhms)
     if not fiSucc:
@@ -207,10 +207,13 @@ def saveOutput(section, isHang):
     if not os.path.isdir(cpDir):
         os.makedirs(cpDir)
 
-    shutil.move(flipLogFile, cpDir)
-    shutil.move(gdbFIlogFile, cpDir)
-    if isSDC:
-        shutil.move(outputFile, cpDir)
+    try:
+        shutil.move(flipLogFile, cpDir)
+        shutil.move(gdbFIlogFile, cpDir)
+        if isSDC:
+            shutil.move(outputFile, cpDir)
+    except:
+        return
 
 
 def preExecution(section):
