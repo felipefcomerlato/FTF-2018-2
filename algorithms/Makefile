@@ -1,5 +1,5 @@
 # C++ compiler
-CC = g++ -g -std=c++11
+CC = g++ -o2 -g -std=c++11
 
 destDir = /tmp/quicksort
 

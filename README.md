@@ -2,6 +2,11 @@
 
 ### Autores
 
+Execute todas as injeções com:
+```{r, engine='bash', code_block_name} 
+$ sh ./run.sh
+```
+
 * **Felipe Comerlato** - [felipefcomerlato](https://github.com/felipefcomerlato)
 * **Gabriel Allegretti** - [gallegretti](https://github.com/gallegretti)
 * **Gustavo Rosa** - [ciques](https://github.com/ciques)

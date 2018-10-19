@@ -93,14 +93,15 @@ void Grafo::dijkstra(int orig, int dest)
 				if(dist[v] > (dist[u] + custo_aresta))
 				{
 					// atualiza a dist�ncia de "v" e insere na fila
+					//printf("%d ", v);
 					dist[v] = dist[u] + custo_aresta;
 					pq.push(make_pair(dist[v], v));
 				}
 			}
 		}
 	}
-	// retorna a dist�ncia m�nima at� o destino
-	//cout << dist[dest] << endl;
+	// Retorna a distância mínima até o destino
+	printf("%d", dist[dest]);
 }
 
 int main()
@@ -123,15 +124,22 @@ int main()
     		j = j + 2;
     	}
 	}
+
+	#ifdef DEBUG
 	auto result_grafo = chrono::high_resolution_clock::now() - inicio_grafo;
 	long long ms_grafo = chrono::duration_cast<chrono::milliseconds>(result_grafo).count();
 	cout << "\n\nTempo para montar o grafo: " << ms_grafo << " milisegundos\n\n";
-
 	auto inicio_busca = chrono::high_resolution_clock::now();
-	grafo.dijkstra(0,V-1); //busca o �ltimo vertice
+	#endif
+	
+	// Busca o último vertice
+	grafo.dijkstra(0, V-1); 
+
+	#ifdef DEBUG
 	auto result_busca = chrono::high_resolution_clock::now() - inicio_busca;
 	long long ms_busca = chrono::duration_cast<chrono::milliseconds>(result_busca).count();
 	cout << "\nTempo de dijkstra: " << ms_busca << " milisegundos\n\n";
+	#endif
 
 	return 0;
 }

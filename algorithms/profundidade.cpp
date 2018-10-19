@@ -49,9 +49,10 @@ void Grafo::dfs(int v, int x)
 	{
 		if(!visitados[v])
 		{
-			// cout << "Visitando vertice " << v << " ...\n";
+			// Visitando o vertice v
+			printf("%d ", v);
 			if(v == x){
-				cout << "Encontrou o vértice " << x << "\n";
+				// Encontrou o vértice
 				break;
 			}
 			visitados[v] = true; // marca como visitado
@@ -107,15 +108,22 @@ int main()
 			j = j + 2;
 		}
 	}
+
+	#ifdef DEBUG
 	auto result_grafo = std::chrono::high_resolution_clock::now() - inicio_grafo;
 	long long ms_grafo = std::chrono::duration_cast<std::chrono::milliseconds>(result_grafo).count();
 	cout << "\n\nTempo para montar o grafo: " << ms_grafo << " milisegundos\n\n";
-
 	auto inicio_busca = std::chrono::high_resolution_clock::now();
-	grafo.dfs(0,V-1); //busca o último vertice
+	#endif
+
+	// Busca o último vertice
+	grafo.dfs(0, V-1); 
+
+	#ifdef DEBUG
 	auto result_busca = std::chrono::high_resolution_clock::now() - inicio_busca;
 	long long ms_busca = std::chrono::duration_cast<std::chrono::milliseconds>(result_busca).count();
 	cout << "\nTempo de dfs: " << ms_busca << " milisegundos\n\n";
+	#endif
 
 	return 0;
 }
