@@ -113,6 +113,8 @@ int main(int argc, char** argv)
         fprintf(stderr, "Usage: %s <output file>\n", argv[0]);
         exit(1);
     }
+	
+
 
 	int V = 150000;
 
@@ -148,7 +150,6 @@ int main(int argc, char** argv)
         printf("Error writing output file");
         exit(1);
     }
-	fclose(fp);
 
 	#ifdef DEBUG
 	auto result_busca = chrono::high_resolution_clock::now() - inicio_busca;
@@ -156,5 +157,6 @@ int main(int argc, char** argv)
 	cout << "\nTempo de dijkstra: " << ms_busca << " milisegundos\n\n";
 	#endif
 
+	fclose(fp);
 	return 0;
 }

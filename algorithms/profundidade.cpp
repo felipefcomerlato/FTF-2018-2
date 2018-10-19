@@ -19,7 +19,7 @@ public:
 
 	// faz uma DFS a partir do vértice v
 	// para encontrar o vértice x
-	void dfs(int v, int x);
+	void dfs(int v, int x, FILE *fp);
 };
 
 Grafo::Grafo(int V)
@@ -34,7 +34,8 @@ void Grafo::adicionarAresta(int v1, int v2)
 	adj[v1].push_back(v2);
 }
 
-void Grafo::dfs(int v, int x)
+// v = inicial, x = final
+void Grafo::dfs(int v, int x, FILE *fp)
 {
 	stack<int> pilha;
 	// bool visitados[V]; // vetor de visitados
@@ -50,9 +51,13 @@ void Grafo::dfs(int v, int x)
 		if(!visitados[v])
 		{
 			// Visitando o vertice v
-			printf("%d ", v);
+			//printf("%d ", v);
 			if(v == x){
 				// Encontrou o vértice
+				while (!pilha.empty()) {
+					fprintf(fp, "%d ", pilha.top());
+					pilha.pop();
+				}
 				break;
 			}
 			visitados[v] = true; // marca como visitado
@@ -88,8 +93,24 @@ void Grafo::dfs(int v, int x)
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
+	char *outputFile;
+	if (argc == 2) {
+        outputFile = argv[1];
+    } else {
+        fprintf(stderr, "Usage: %s <output file>\n", argv[0]);
+        exit(1);
+    }
+
+	FILE *fp;
+    if (fp = fopen(outputFile, "wb")) {
+        // File ok
+    } else {
+        printf("Error writing output file");
+        exit(1);
+    }
+
 	int V = 15000000;
 
 	Grafo grafo(V);
@@ -117,7 +138,7 @@ int main()
 	#endif
 
 	// Busca o último vertice
-	grafo.dfs(0, V-1); 
+	grafo.dfs(0, V-1, fp); 
 
 	#ifdef DEBUG
 	auto result_busca = std::chrono::high_resolution_clock::now() - inicio_busca;
@@ -125,5 +146,6 @@ int main()
 	cout << "\nTempo de dfs: " << ms_busca << " milisegundos\n\n";
 	#endif
 
+	fclose(fp);
 	return 0;
 }

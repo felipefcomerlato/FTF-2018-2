@@ -18,7 +18,7 @@ public:
 	void adicionarAresta(int v1, int v2); // adiciona uma aresta no grafo
 
 	// faz uma BFS a partir de um v�rtice
-	void bfs(int v);
+	void bfs(int v, FILE *fp);
 };
 
 Grafo::Grafo(int V)
@@ -33,7 +33,7 @@ void Grafo::adicionarAresta(int v1, int v2)
 	adj[v1].push_back(v2);
 }
 
-void Grafo::bfs(int v)
+void Grafo::bfs(int v, FILE *fp)
 {
 	queue<int> fila;
 
@@ -53,7 +53,7 @@ void Grafo::bfs(int v)
 			if(!visitados[*it])
 			{
 				// Visitando vertice *it
-				printf("%d ", *it);
+				fprintf(fp, "%d ", *it);
 				visitados[*it] = true; // marca como visitado
 				fila.push(*it); // insere na fila
 			}
@@ -70,8 +70,24 @@ void Grafo::bfs(int v)
 	}
 }
 
-int main()
+int main(int argc, char** argv)
 {
+	char *outputFile;
+	if (argc == 2) {
+        outputFile = argv[1];
+    } else {
+        fprintf(stderr, "Usage: %s <output file>\n", argv[0]);
+        exit(1);
+    }
+
+	FILE *fp;
+    if (fp = fopen(outputFile, "wb")) {
+        // File ok
+    } else {
+        printf("Error writing output file");
+        exit(1);
+    }
+
 	int V = 15000000;
 
 	Grafo grafo(V);
@@ -91,8 +107,6 @@ int main()
         }
     }
 
-	#define DEBUG
-
 	#ifdef DEBUG
 	auto result_grafo = std::chrono::high_resolution_clock::now() - inicio_grafo;
 	long long ms_grafo = std::chrono::duration_cast<std::chrono::milliseconds>(result_grafo).count();
@@ -100,7 +114,7 @@ int main()
 	auto inicio_busca = std::chrono::high_resolution_clock::now();
 	#endif
 
-	grafo.bfs(0);
+	grafo.bfs(0, fp);
 
 	#ifdef DEBUG
 	auto result_busca = std::chrono::high_resolution_clock::now() - inicio_busca;
@@ -108,5 +122,6 @@ int main()
 	cout << "\nTempo de bfs: " << ms_busca << " milisegundos\n\n";
 	#endif
 
+	fclose(fp);
 	return 0;
 }
