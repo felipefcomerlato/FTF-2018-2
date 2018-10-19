@@ -23,7 +23,7 @@ public:
 
 	// aplica dijkstra a partir do v�rtice v
 	// para encontrar o v�rtice x
-	void dijkstra(int v, int x);
+	int dijkstra(int v, int x);
 };
 
 Grafo::Grafo(int V)
@@ -38,7 +38,7 @@ void Grafo::adicionarAresta(int v1, int v2, int custo)
 	adj[v1].push_back(make_pair(v2, custo));
 }
 
-void Grafo::dijkstra(int orig, int dest)
+int Grafo::dijkstra(int orig, int dest)
 {
 	// vetor de dist�ncias
 	int dist[V];
@@ -101,15 +101,22 @@ void Grafo::dijkstra(int orig, int dest)
 		}
 	}
 	// Retorna a distância mínima até o destino
-	printf("%d", dist[dest]);
+	return dist[dest];
 }
 
-int main()
+int main(int argc, char** argv)
 {
+	char *outputFile;
+	if (argc == 2) {
+        outputFile = argv[1];
+    } else {
+        fprintf(stderr, "Usage: %s <output file>\n", argv[0]);
+        exit(1);
+    }
+
 	int V = 150000;
 
 	Grafo grafo(V);
-
 	auto inicio_grafo = chrono::high_resolution_clock::now();
 	int j = 1;
 	for(int i = 0; i < V; i++)
@@ -133,7 +140,15 @@ int main()
 	#endif
 	
 	// Busca o último vertice
-	grafo.dijkstra(0, V-1); 
+	int distancia = grafo.dijkstra(0, V-1);
+	FILE *fp;
+    if (fp = fopen(outputFile, "wb")) {
+        fprintf(fp, "%d", distancia);
+    } else {
+        printf("Error writing output file");
+        exit(1);
+    }
+	fclose(fp);
 
 	#ifdef DEBUG
 	auto result_busca = chrono::high_resolution_clock::now() - inicio_busca;
