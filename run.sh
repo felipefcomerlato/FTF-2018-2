@@ -21,9 +21,9 @@ mkdir -p /tmp/ftf/gold
 
 echo "Injecting faults"
 # One terminal per executable
-gnome-terminal -e "./fault_injector.py -c ./algorithms/djikstra.conf     -i 4"
-gnome-terminal -e "./fault_injector.py -c ./algorithms/largura.conf      -i 4"
-gnome-terminal -e "./fault_injector.py -c ./algorithms/profundidade.conf -i 4"
+gnome-terminal -e "./fault_injector.py -c ./algorithms/djikstra.conf     -i 10000"
+gnome-terminal -e "./fault_injector.py -c ./algorithms/largura.conf      -i 10000"
+gnome-terminal -e "./fault_injector.py -c ./algorithms/profundidade.conf -i 10000"
 
 echo "Run ./sh stats.sh when done to get an overview of corruptions (SDCs), Hangs, Crashes, and masked faults."
 
