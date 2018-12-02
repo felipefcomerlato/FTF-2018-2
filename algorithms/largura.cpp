@@ -33,7 +33,7 @@ Grafo::Grafo(int V)
 
 	// cria as listas
 	adj = new list<int>[V];
-	adj_2 = new list<int>[V];
+	adj_2 = new list<int>[V_2];
 }
 
 void Grafo::adicionarAresta(int v1, int v2)
@@ -84,7 +84,7 @@ void Grafo::bfs(int v, FILE *fp)
 		}
 
 		// verifica se a fila N�O est� vazia
-		if(!fila.empty())
+		if(!fila.empty() && !fila_2.empty())
 		{
 			// obt�m o primeiro elemento
 			v = fila.front(); 
