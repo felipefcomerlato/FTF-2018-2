@@ -11,7 +11,11 @@ using namespace std;
 class Grafo
 {
 	int V; // n�mero de v�rtices
-	list<int> *adj; // ponteiro para um array contendo as listas de adjac�ncias
+	int V_2;
+
+	// ponteiro para um array contendo as listas de adjac�ncias
+	list<int> *adj;
+	list<int> *adj_2;
 
 public:
 	Grafo(int V); // construtor
@@ -23,47 +27,76 @@ public:
 
 Grafo::Grafo(int V)
 {
-	this->V = V; // atribui o n�mero de v�rtices
-	adj = new list<int>[V]; // cria as listas
+	// atribui o n�mero de v�rtices
+	this->V = V;
+	this->V_2 = V;
+
+	// cria as listas
+	adj = new list<int>[V];
+	adj_2 = new list<int>[V];
 }
 
 void Grafo::adicionarAresta(int v1, int v2)
 {
 	// adiciona v�rtice v2 � lista de v�rtices adjacentes de v1
 	adj[v1].push_back(v2);
+	adj_2[v1].push_back(v2);
 }
 
 void Grafo::bfs(int v, FILE *fp)
 {
 	queue<int> fila;
+	queue<int> fila_2;
 
 	bool* visitados = (bool*)malloc(sizeof(bool*) * V); //fix segfault
+	bool* visitados_2 = (bool*)malloc(sizeof(bool*) * V); //fix segfault
 
-	//bool visitados[V]; // vetor de visitados
 
-	for(int i = 0; i < V; i++)
+	for(int i = 0; i < V; i++) {
 		visitados[i] = false;
+		visitados_2[i] = false;
+	}
 	
-	visitados[v] = true; // marca como visitado
+	// marca como visitado
+	visitados[v] = true;
+	visitados_2[v] = true;
 
 	while(true)
 	{
 		for(auto it = adj[v].begin(); it != adj[v].end(); it++)
 		{
+			if (visitados[*it] != visitados_2[*it]) {
+				return exit(-1);
+			}
 			if(!visitados[*it])
 			{
 				// Visitando vertice *it
 				fprintf(fp, "%d ", *it);
-				visitados[*it] = true; // marca como visitado
-				fila.push(*it); // insere na fila
+
+				// marca como visitado
+				visitados[*it] = true;
+				visitados_2[*it] = true;
+
+				// insere na fila
+				fila.push(*it);
+				fila_2.push(*it);
 			}
 		}
 
 		// verifica se a fila N�O est� vazia
 		if(!fila.empty())
 		{
-			v = fila.front(); // obt�m o primeiro elemento
-			fila.pop(); // remove da fila
+			// obt�m o primeiro elemento
+			v = fila.front(); 
+			int v2 = fila_2.front();
+			if (v != v2) {
+				exit(-1);
+			}
+
+			// remove da fila
+			fila.pop();
+			fila_2.pop();
+
 		}
 		else
 			break;
@@ -92,8 +125,11 @@ int main(int argc, char** argv)
 
 	Grafo grafo(V);
 
+	#ifdef DEBUG
 	auto inicio_grafo = std::chrono::high_resolution_clock::now();
-    int j = 1;
+    #endif
+	
+	int j = 1;
     for(int i = 0; i < V; i++)
     {
         if(j < V)
