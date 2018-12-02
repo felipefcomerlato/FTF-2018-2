@@ -121,7 +121,8 @@ int main(int argc, char** argv)
         exit(1);
     }
 
-	int V = 15000000;
+	int V =   15000000;
+	int V_2 = 15000000;
 
 	Grafo grafo(V);
 
@@ -130,8 +131,17 @@ int main(int argc, char** argv)
     #endif
 	
 	int j = 1;
-    for(int i = 0; i < V; i++)
+
+	int i = 0;
+	int i_2 = 0;
+    for(i = 0, i_2 = 0; i < V; i++, i_2++)
     {
+		if (i != i_2) {
+			exit(-1);
+		}
+		if (V != V_2) {
+			exit(-1);
+		}
         if(j < V)
         {
             grafo.adicionarAresta(i, j);
