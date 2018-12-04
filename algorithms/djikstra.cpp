@@ -85,14 +85,21 @@ int Grafo::dijkstra(int orig, int dest)
 	{
 		pair<int, int> p = pq.top(); // extrai o pair do topo
 		pair<int, int> p_2 = pq_2.top(); // extrai o pair do topo
+
+		if(p != p_2){
+            exit(-1);
+		}
 		int u = p.second; // obt�m o v�rtice do pair
 		int u_2 = p_2.second; // obt�m o v�rtice do pair
 		pq.pop(); // remove da fila
 		pq_2.pop(); // remove da fila
 
 		// verifica se o v�rtice n�o foi expandido
-		if(visitados[u] == false && visitados_2[u_2])
+		if(visitados[u] == false)
 		{
+		     if(visitados[u] != visitados_2[u_2]){
+                exit(-1);
+		     }
 			// marca como visitado
 			visitados[u] = true;
 			visitados_2[u] = true;
@@ -133,8 +140,6 @@ int Grafo::dijkstra(int orig, int dest)
 					pq_2.push(make_pair(dist_2[v_2], v_2));
 				}
 			}
-		} else {
-			exit(-1);
 		}
 	}
 	// Retorna a distância mínima até o destino ou erro caso distancias sejam diferentes
