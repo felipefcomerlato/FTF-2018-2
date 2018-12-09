@@ -29,8 +29,7 @@ Grafo::Grafo(int V)
 {
 	this->V = V; // atribui o número de vértices
 	adj = new list<int>[V]; // cria as listas
-
-	this->V_2 = V_2; // atribui o número de vértices
+	this->V_2 = V; // atribui o número de vértices
 	adj_2 = new list<int>[V_2]; // cria as listas
 }
 
