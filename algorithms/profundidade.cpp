@@ -146,6 +146,9 @@ int main(int argc, char** argv)
 	int V = 15000000;
 	int V_2 = 15000000;
 
+	if (V != V_2) {
+		exit(-1);
+	}
 	Grafo grafo(V);
 
 	#ifdef DEBUG
@@ -153,12 +156,16 @@ int main(int argc, char** argv)
 	#endif
 
 	int j = 1;
+	int j_2 = 1;
 
 	int i = 0;
 	int i_2 = 0;
 	for(i = 0, i_2 = 0; i < V; i++, i_2++)
 	{
 		if (i != i_2) {
+			exit(-1);
+		}
+		if (j != j_2) {
 			exit(-1);
 		}
 		if (V != V_2) {
@@ -173,6 +180,7 @@ int main(int argc, char** argv)
 		    		grafo.adicionarAresta(i, j+1);
 				}
 				j = j + 2;
+				j_2 = j_2 + 2;
 			}
 		}
 	}
