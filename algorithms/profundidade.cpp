@@ -125,6 +125,9 @@ void Grafo::dfs(int v, int x, FILE *fp)
 	}
 }
  
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+
 int main(int argc, char** argv)
 {
 	char *outputFile;
@@ -143,12 +146,13 @@ int main(int argc, char** argv)
         exit(1);
     }
 
-	int V = 15000000;
-	int V_2 = 15000000;
+	int V = 150000;
+	int V_2 =150000;
 
 	if (V != V_2) {
 		exit(-1);
 	}
+
 	Grafo grafo(V);
 
 	#ifdef DEBUG
@@ -162,6 +166,7 @@ int main(int argc, char** argv)
 	int i_2 = 0;
 	for(i = 0, i_2 = 0; i < V; i++, i_2++)
 	{
+
 		if (i != i_2) {
 			exit(-1);
 		}
@@ -171,17 +176,15 @@ int main(int argc, char** argv)
 		if (V != V_2) {
 			exit(-1);
 		}
-		{
-	    	if(j < V)
-	    	{
-				grafo.adicionarAresta(i, j);
-				if (j < V-1)
-				{
-		    		grafo.adicionarAresta(i, j+1);
-				}
-				j = j + 2;
-				j_2 = j_2 + 2;
+	    if(j < V)
+	    {
+			grafo.adicionarAresta(i, j);
+			if (j < V-1)
+			{
+	    		grafo.adicionarAresta(i, j+1);
 			}
+			j = j + 2;
+			j_2 = j_2 + 2;
 		}
 	}
 
@@ -204,3 +207,6 @@ int main(int argc, char** argv)
 	fclose(fp);
 	return 0;
 }
+
+#pragma GCC pop_options
+

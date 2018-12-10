@@ -94,12 +94,13 @@ int Grafo::dijkstra(int orig, int dest)
 		pq.pop(); // remove da fila
 		pq_2.pop(); // remove da fila
 
+		if (visitados[u] != visitados_2[u]) {
+			exit(-1);
+		}
+
 		// verifica se o v�rtice n�o foi expandido
 		if(visitados[u] == false)
 		{
-		     if(visitados[u] != visitados_2[u_2]){
-                exit(-1);
-		     }
 			// marca como visitado
 			visitados[u] = true;
 			visitados_2[u] = true;
@@ -149,6 +150,10 @@ int Grafo::dijkstra(int orig, int dest)
 		return dist[dest];
 }
 
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+
+
 int main(int argc, char** argv)
 {
 	char *outputFile;
@@ -160,9 +165,14 @@ int main(int argc, char** argv)
     }
 
 
-
 	int V = 150000;
 	int V_2 =150000;
+
+	if (V != V_2) {
+		exit(-1);
+	}
+
+	
 
 	Grafo grafo(V);
 
@@ -220,3 +230,5 @@ int main(int argc, char** argv)
 	fclose(fp);
 	return 0;
 }
+
+#pragma GCC pop_options

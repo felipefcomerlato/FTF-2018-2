@@ -103,6 +103,9 @@ void Grafo::bfs(int v, FILE *fp)
 	}
 }
 
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+
 int main(int argc, char** argv)
 {
 	char *outputFile;
@@ -121,12 +124,13 @@ int main(int argc, char** argv)
         exit(1);
     }
 
-	int V =   15000000;
-	int V_2 = 15000000;
+	int V = 150000;
+	int V_2 =150000;
 
 	if (V != V_2) {
 		exit(-1);
 	}
+
 	Grafo grafo(V);
 
 	#ifdef DEBUG
@@ -149,6 +153,7 @@ int main(int argc, char** argv)
 		if (j != j_2) {
 			exit(-1);
 		}
+
         if(j < V)
         {
             grafo.adicionarAresta(i, j);
@@ -179,3 +184,5 @@ int main(int argc, char** argv)
 	fclose(fp);
 	return 0;
 }
+
+#pragma GCC pop_options
